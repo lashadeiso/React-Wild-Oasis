@@ -1,3 +1,5 @@
+import { createPortal } from "react-dom";
+import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 
 const StyledModal = styled.div`
@@ -10,6 +12,7 @@ const StyledModal = styled.div`
   box-shadow: var(--shadow-lg);
   padding: 3.2rem 4rem;
   transition: all 0.5s;
+  border: 1px solid var(--color-grey-300);
 `;
 
 const Overlay = styled.div`
@@ -48,3 +51,22 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+function Modal({ children, onClose }) {
+  // createPortal ის საშუელბით ჩვენი Mdal კომპონენტი შეგვიძლია დავარენდეროთ მიმდინარე dom ის ხის გარეთ,
+  // ამ შემთხვევაში მას მეორე პარამეტრად გადავეცით document.body,რაც იმას ნიშნავს რომ
+  // ის არის პირდაპირ მისი ჩაილდი
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={onClose}>
+          <HiXMark />
+        </Button>
+        <div>{children}</div>
+      </StyledModal>
+    </Overlay>,
+    document.body
+  );
+}
+
+export default Modal;
