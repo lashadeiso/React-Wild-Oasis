@@ -20,9 +20,9 @@ function HeaderMenu() {
           <HiOutlineUser />
         </ButtonIcon>
       </li>
-      {/* <li>
+      <li>
         <DarkModeToggle />
-      </li> */}
+      </li>
       <li>
         <Logout />
       </li>
